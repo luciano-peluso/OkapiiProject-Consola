@@ -15,12 +15,12 @@ Sistema de gestión de proyectos desarrollado en Java con Maven, sin frameworks,
 - Maven 3.6+
 - Sin frameworks adicionales.
 - Gestionado por consola.
-
+  
 
 ## Colaboradores
 
-- Nombre del usuario - Desarrollador
-- Nombre del compañero - Desarrollador
+- Desarrollador: Luciano Peluso
+- Desarrollador: Nahuel Olivera
 
 ## Licencia
 
