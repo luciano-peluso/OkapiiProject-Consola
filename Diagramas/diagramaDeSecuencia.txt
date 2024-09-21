@@ -1,0 +1,93 @@
+@startuml
+
+
+actor Cliente
+actor Gerente
+actor Administrador
+participant "Sistema" as Sistema
+participant "BaseDeUsuarios" as BaseDeUsuarios
+participant "Proyecto" as Proyecto
+participant "Desarrollador" as Desarrollador
+
+Cliente -> Sistema: Inicia Sesion
+Sistema -> BaseDeUsuarios: Verifica el usuario
+BaseDeUsuarios -> BaseDeUsuarios: Busca el usuario
+BaseDeUsuarios -> Sistema: Usuario encontrado
+Sistema -> Cliente: Muestra opciones
+Cliente -> Cliente: Opcion: ver proyectos
+Cliente -> Sistema: Pide ver sus proyectos
+Sistema -> Cliente: Lista proyectos
+Cliente -> Cliente: Opcion: ver mis datos
+Cliente -> Sistema: Pide ver sus datos
+Sistema -> Cliente: Muestra datos y pide completarlos si estan incompletos
+Cliente -> Sistema: Completa sus datos y los guarda
+Sistema -> Cliente: Muestra opciones
+Cliente -> Cliente: Cierra Sesion
+
+
+Gerente -> Sistema: Inicia Sesion
+Sistema -> BaseDeUsuarios: Verifica el usuario
+BaseDeUsuarios -> BaseDeUsuarios: Busca el usuario
+BaseDeUsuarios -> Sistema: Usuario encontrado
+Sistema -> Gerente: Muestra opciones
+Gerente -> Sistema: Opcion: administrar clientes
+Sistema -> BaseDeUsuarios: Pide usuarios clientes
+BaseDeUsuarios -> BaseDeUsuarios: Busca usuarios clientes
+BaseDeUsuarios -> Sistema: Usurios clientes encontrados
+Sistema -> Gerente: Muestra usuarios clientes
+Gerente -> Sistema: Indica cliente por ID
+Sistema -> Gerente: Muestra los proyectos del cliente y da opciones
+Gerente -> Gerente: Opcion: agregar proyectos
+Gerente -> Sistema: Escribe los parametros del proyecto 
+Sistema -> Sistema: Agrega el proyecto al cliente
+Sistema -> Gerente: Muestra opciones
+Gerente -> Gerente: Opcion: finalizar proyecto
+Gerente -> Sistema: Da la orden de finalizar el proyecto
+Sistema -> Proyecto: Finaliza el proyecto
+Proyecto -> Proyecto: Fecha de finalizacion
+Proyecto -> Desarrollador: Lo libera
+Desarrollador -> Sistema: Pasa a estar disponible
+Sistema -> Gerente: Muestra opciones
+Gerente -> Gerente: Cierra sesion
+
+
+Administrador -> Sistema: Inicia Sesion
+Sistema -> BaseDeUsuarios: Verifica el usuario
+BaseDeUsuarios -> BaseDeUsuarios: Busca el usuario
+BaseDeUsuarios -> Sistema: Usuario encontrado
+Sistema -> Administrador: Muestra opciones
+Administrador -> Administrador: Opcion: registrar cliente
+Administrador -> Sistema: Registra gerente
+Sistema -> BaseDeUsuarios: Verifica el usuario por si se repite
+BaseDeUsuarios -> BaseDeUsuarios: Busca el usuario si no se repite
+BaseDeUsuarios -> Sistema: El usuario no es repetido y se crea
+Sistema -> Administrador: Muestra opciones
+Administrador -> Administrador: Opcion: registrar gerente
+Administrador -> Sistema: Registra gerente
+Sistema -> BaseDeUsuarios: Verifica el usuario por si se repite
+BaseDeUsuarios -> BaseDeUsuarios: Busca el usuario si no se repite
+BaseDeUsuarios -> Sistema: El usuario no es repetido y se crea
+Sistema -> Administrador: Muestra opciones
+Administrador -> Administrador: Opcion: registrar desarrollador
+Administrador -> Sistema: Registra desarrollador
+Sistema -> Sistema: Busca y verifica el desarrollador por si se repite
+Sistema -> Administrador: El desarrollador no existe y se crea
+Administrador -> Sistema: Opcion: ver desarrolladores disponibles
+Sistema -> Administrador: Lista desarrolladores disponibles si es que hay
+Administrador -> Sistema: Opcion: asignar desarrolladores
+Sistema -> Administrador: Muestra clientes con proyectos sin desarrollador
+Administrador -> Sistema: Elige desarrollador a asignar
+Sistema -> Proyecto: Le asigna el desarrollador
+Proyecto -> Desarrollador: Le pasa el estado de ocupado
+Desarrollador -> Sistema: Deja de estar disponibles y no aparece en la lista
+Sistema -> Administrador: Muestra opciones
+Administrador -> Sistema: Opcion: ver todos los usuarios
+Sistema -> BaseDeUsuarios: Pide los usuarios
+BaseDeUsuarios -> BaseDeUsuarios: Busca todos los usuarios
+BaseDeUsuarios -> Sistema: Devuelve todos los usuarios
+Sistema -> Administrador: Mustra todos los usuarios
+Administrador -> Administrador: Cierra Sesion
+
+
+@enduml
+

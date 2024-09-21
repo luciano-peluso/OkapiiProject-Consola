@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+
+actor Cliente as C
+actor Administrador as A
+actor Gerente as G
+
+rectangle "Sistema"{
+C --> (Ver proyectos)
+C --> (Ver datos)
+C --> (Completar datos)
+
+G --> (Crear proyectos del cliente)
+G --> (Finalizar proyectos del cliente)
+
+A --> (Registrar clientes)
+A --> (Registrar gerentes)
+A --> (Registrar desarrolladores)
+A --> (Ver desarrolladores disponibles)
+A --> (Asignar desarrolladores)
+A --> (Ver todos los usuarios)
+
+}
+
+@enduml

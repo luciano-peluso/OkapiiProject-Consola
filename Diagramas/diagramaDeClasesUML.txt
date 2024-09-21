@@ -1,0 +1,162 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor transparent
+skinparam monochrome true
+skinparam shadowing false
+
+
+/'
+**** Descripción de las clases ****
+'/
+
+
+class Sistema{
+  - BaseDeUsuarios users
+  + Sistema()
+  + arrancar()
+  + mostrarOpciones()
+  + loguearUsuario()
+  + serializar(nombre: String)
+  + deSerializar(nombre: String)
+  - registrarUsuarioAdmin()
+}
+
+
+class BaseDeUsuarios{
+  - devs: ArrayList<Desarrollador>
+  - u: ArrayList<Usuario>
+  + BaseDeUsuarios()
+  + estaVacia()
+  + chequearUsuario(user: String)
+  + buscarUsuario(username: String)
+  + crearUsuarioAdministrador(user: String, password: String)
+}
+
+class Cliente{
+  - id: Integer
+  - nombre: String
+  - proyetos: ArrayList<Proyecto>
+  - correoElectronico: String
+  - numeTelefono: String
+  + Cliente(username: String, password: String, id: Integer, identificador: String)
+  + setId(id: Integer)
+  + completarDatos()
+  + verOpciones()
+  + hacerOpcion()
+  + verProyectos()
+  + getId()
+  + addProyecto()
+  + tieneProyectos()
+  + verTituloProyectos()
+  + setDesarrollador()
+  + finalizarProyecto()
+  - datosCompletos()
+  - verDatosCompletos()
+  - verDatos()
+}
+
+class Gerente{
+  - clientes: ArrayList<Usuario> 
+  + Gerente(username: String, password: String, identificador: String, clientes: ArrayList)
+  + verOpciones()
+  + hacerOpcion(opcion: String)
+}
+
+class Administrador{
+  - usuarios: ArrayList<Usuario>
+  - devs: ArrayList<Desarrollador>
+  + Administrador(username: String, password: String, usuarios: ArrayList, devs: ArrayList, identificador: String)
+  + verOpciones()
+  + hacerOpcion()
+  + chequearUsuario(user: String)
+  + buscarUsuario(username: String)
+  + crearUsuarioCliente(user: String, password: String)
+  + crearUsuarioGerente(user: String, password: String)
+  + registrarUsuarioCliente()
+  + mostrarDesarrolladoresDisponibles()
+  + hayDesarrolladoresDisponibles()
+  - asignarDesarrolladores()
+  - crearUsuarioDesarrollador(user: String, habilidades: ArrayList<String>)
+  - registrarUsuarioGerente()
+  - registrarusuarioDesarrollador()
+  - verUsuarios()
+}
+
+class Proyecto{
+  - fecha: String
+  - estado: String
+  - presupuesto: String
+  - estaFinalizado: Bool
+  - nombre: String
+  - descripcion: String
+  - desarrolladores: ArrayList<Desarrollador>
+  + Proyecto(nombre: String, descripcion: String, presupuesto: String)
+  + getEstado()
+  + setEstado(estado: String)
+  + estaSinFinalizar()
+  + estaFinalizado()
+  + getNombre()
+  + getDescripcion()
+  + getPresupuesto()
+  + getFecha()
+  + tieneDesarrolladores()
+  + setDesarrollador(dev: Desarrollador)
+  + mostrarDesarrolladores()
+  + setFechaFinalizado()
+  + liberarDesarrolladores()
+  - asignarFecha()
+}
+
+class Desarrollador{
+  - nombre: String
+  - estDisponible: Bool
+  - habilidades: ArrayList<String>
+  + Desarrollador(nombre: String, habilidades: ArrayList)
+  + getEstaDisponible()
+  + setEstaDisponible(estaDisponible: Bool)
+  + getNombre()
+  + getHabilidades()
+}
+
+abstract class Usuario{
+  - username: String
+  - password: String
+  - estaLogueado: Bool
+  - identificador: String
+  + Usuario(username: String, password: String, identificador: String)
+  + getUsername()
+  + getPassword()
+  + getIdentificador()
+  + estaLogueado()
+  + seLogueo()
+  + seDeslogueo()
+  + cambiarPassword()
+  + setPassword()
+  + sonIgualesUsers()
+  + sonIgualesPasswords()
+  + verOpciones()
+}
+
+/'
+**** Relaciones entre las clases ****
+'/
+Sistema ..> Sistema
+Sistema o--> BaseDeUsuarios
+Sistema ..> Usuario
+BaseDeUsuarios o--> Desarrollador
+BaseDeUsuarios o--> Usuario
+BaseDeUsuarios ..> Usuario
+Usuario <.. Administrador
+Usuario <--o Administrador
+Usuario <|-- Administrador
+Administrador o--> Desarrollador
+Usuario <|-- Gerente
+Usuario <--o Gerente
+Usuario <|-- Cliente
+Cliente ..> Desarrollador
+Cliente o--> Proyecto
+Desarrollador <.. Proyecto
+Desarrollador <--o Proyecto
+
+@enduml
